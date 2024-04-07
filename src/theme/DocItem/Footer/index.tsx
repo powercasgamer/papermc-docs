@@ -11,7 +11,7 @@ export default function DocItemFooter(): JSX.Element | null {
 
   console.log("DOCITEM METADATA: " + metadata);
   console.log("DOCITEM METADATA: ", metadata);
-  console.log("DOCITEM METADATA: " + ++metadata.lastUpdatedCommit);
+  console.log("DOCITEM METADATA: " + metadata.lastUpdatedCommit);
   console.log("DOCITEM METADATA: ", metadata.lastUpdatedCommit);
   const { editUrl, lastUpdatedAt, lastUpdatedBy, lastUpdatedCommit, tags } = metadata;
 
