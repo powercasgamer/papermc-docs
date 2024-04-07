@@ -1,0 +1,128 @@
+diff --git a/src/gitUtils.ts b/src/gitUtils.ts
+index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..f62f5c06140f21e3d296bb991df0e1b9a2389169 100644
+--- a/src/gitUtils.ts
++++ b/src/gitUtils.ts
+@@ -50,6 +50,7 @@ export async function getFileCommitDate(
+   date: Date;
+   /** Timestamp returned from git, converted to **milliseconds**. */
+   timestamp: number;
++  commit: string;
+ }>;
+ /**
+  * Fetches the git history of a file and returns a relevant commit date.
+@@ -79,6 +80,7 @@ export async function getFileCommitDate(
+   timestamp: number;
+   /** The author's name, as returned from git. */
+   author: string;
++  commit: string;
+ }>;
+ 
+ export async function getFileCommitDate(
+@@ -94,6 +96,7 @@ export async function getFileCommitDate(
+   date: Date;
+   timestamp: number;
+   author?: string;
++  commit: string;
+ }> {
+   if (!hasGit()) {
+     throw new GitNotFoundError(
+@@ -108,7 +111,7 @@ export async function getFileCommitDate(
+   }
+ 
+   const args = [
+-    `--format=%ct${includeAuthor ? ',%an' : ''}`,
++    `--format=%h%ct${includeAuthor ? ',%an' : ''}`,
+     '--max-count=1',
+     age === 'oldest' ? '--follow --diff-filter=A' : undefined,
+   ]
+@@ -138,9 +141,9 @@ export async function getFileCommitDate(
+       `Failed to retrieve the git history for file "${file}" with exit code ${result.code}: ${result.stderr}`,
+     );
+   }
+-  let regex = /^(?<timestamp>\d+)$/;
++  let regex = /^(?<commit>\w+),(?<timestamp>\d+)$/;
+   if (includeAuthor) {
+-    regex = /^(?<timestamp>\d+),(?<author>.+)$/;
++    regex = /^(?<commit>\w+),(?<timestamp>\d+),(?<author>.+)$/;
+   }
+ 
+   const output = result.stdout.trim();
+@@ -164,7 +167,7 @@ export async function getFileCommitDate(
+   const date = new Date(timestamp);
+ 
+   if (includeAuthor) {
+-    return {date, timestamp, author: match.groups!.author!};
++    return {date, timestamp, author: match.groups!.author!, match.groups!.commit};
+   }
+-  return {date, timestamp};
++  return {date, timestamp, match.groups!.commit};
+ }
+diff --git a/src/lastUpdateUtils.ts b/src/lastUpdateUtils.ts
+index a11dc782ef164586eb0b71510a53ad95af843f09..eed2b0439d45e26057b1955e128321ffa238b6ca 100644
+--- a/src/lastUpdateUtils.ts
++++ b/src/lastUpdateUtils.ts
+@@ -19,6 +19,7 @@ export type LastUpdateData = {
+   lastUpdatedAt?: number;
+   /** The author's name, usually coming from `git log` */
+   lastUpdatedBy?: string;
++  lastUpdatedCommit?: string;
+ };
+ 
+ let showedGitRequirementError = false;
+@@ -39,7 +40,7 @@ export async function getGitLastUpdate(
+       includeAuthor: true,
+     });
+ 
+-    return {lastUpdatedAt: result.timestamp, lastUpdatedBy: result.author};
++    return {lastUpdatedAt: result.timestamp, lastUpdatedBy: result.author, lastUpdatedCommit: result.commit};
+   } catch (err) {
+     if (err instanceof GitNotFoundError) {
+       if (!showedGitRequirementError) {
+@@ -66,6 +67,7 @@ export async function getGitLastUpdate(
+ export const LAST_UPDATE_FALLBACK: LastUpdateData = {
+   lastUpdatedAt: 1539502055000,
+   lastUpdatedBy: 'Author',
++  lastUpdatedCommit: 'Unknown',
+ };
+ 
+ export async function getLastUpdate(
+@@ -90,6 +92,7 @@ export type FrontMatterLastUpdate = {
+    * [parsable date string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse).
+    */
+   date?: Date | string;
++  commit?: string;
+ };
+ 
+ export async function readLastUpdateData(
+@@ -107,6 +110,8 @@ export async function readLastUpdateData(
+   const frontMatterTimestamp = lastUpdateFrontMatter?.date
+     ? new Date(lastUpdateFrontMatter.date).getTime()
+     : undefined;
++  const frontMatterCommit = lastUpdateFrontMatter?.commit;
++
+ 
+   // We try to minimize git last update calls
+   // We call it at most once
+@@ -116,6 +121,8 @@ export async function readLastUpdateData(
+     getLastUpdateMemoized().then((update) => update?.lastUpdatedBy);
+   const getLastUpdateAt = () =>
+     getLastUpdateMemoized().then((update) => update?.lastUpdatedAt);
++  const getLastUpdateCommit = () =>
++    getLastUpdateMemoized().then((update) => update?.lastUpdatedCommit);
+ 
+   const lastUpdatedBy = showLastUpdateAuthor
+     ? frontMatterAuthor ?? (await getLastUpdateBy())
+@@ -125,8 +132,13 @@ export async function readLastUpdateData(
+     ? frontMatterTimestamp ?? (await getLastUpdateAt())
+     : undefined;
+ 
++  const lastUpdatedCommit = showLastUpdateTime // Paper - update later too lazy right now
++    ? frontMatterCommit ?? (await getLastUpdateCommit())
++    : undefined;
++
+   return {
+     lastUpdatedBy,
+     lastUpdatedAt,
++    lastUpdatedCommit,
+   };
+ }
