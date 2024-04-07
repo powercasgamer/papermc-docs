@@ -73,7 +73,7 @@ export default function LastUpdated({
   lastUpdatedBy,
   lastUpdatedCommit,
 }: Props): JSX.Element {
-  console.log(lastUpdatedCommit);
+  console.log("Theme/LastUpdated: " + lastUpdatedCommit);
   return (
     <span className={ThemeClassNames.common.lastUpdated}>
       <Translate

@@ -6,13 +6,13 @@ index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..acfe60e8b707e084a16bbad2df24b286
    date: Date;
    timestamp: number;
    author?: string;
-+  commit: string
++  commit?: string
  }> {
    if (!hasGit()) {
      throw new GitNotFoundError(
 @@ -108,7 +109,7 @@ export async function getFileCommitDate(
    }
- 
+
    const args = [
 -    `--format=%ct${includeAuthor ? ',%an' : ''}`,
 +    `--format=%h,%ct${includeAuthor ? ',%an' : ''}`,
@@ -29,14 +29,14 @@ index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..acfe60e8b707e084a16bbad2df24b286
 -    regex = /^(?<timestamp>\d+),(?<author>.+)$/;
 +    regex = /^(?<commit>\w+),(?<timestamp>\d+),(?<author>.+)$/;
    }
- 
+
    const output = result.stdout.trim();
 @@ -162,9 +163,10 @@ export async function getFileCommitDate(
    const timestampInSeconds = Number(match.groups!.timestamp);
    const timestamp = timestampInSeconds * 1_000;
    const date = new Date(timestamp);
 +  const commit = match.groups!.commit
- 
+
    if (includeAuthor) {
 -    return {date, timestamp, author: match.groups!.author!};
 +    return {date, timestamp, author: match.groups!.author!, commit};
@@ -54,7 +54,7 @@ index a11dc782ef164586eb0b71510a53ad95af843f09..35b410c8b3df816ad1097a5b7947667e
    lastUpdatedBy?: string;
 +  lastUpdatedCommit?: string;
  };
- 
+
  let showedGitRequirementError = false;
 @@ -66,6 +67,7 @@ export async function getGitLastUpdate(
  export const LAST_UPDATE_FALLBACK: LastUpdateData = {
@@ -62,7 +62,7 @@ index a11dc782ef164586eb0b71510a53ad95af843f09..35b410c8b3df816ad1097a5b7947667e
    lastUpdatedBy: 'Author',
 +  lastUpdatedCommit: 'Unknown',
  };
- 
+
  export async function getLastUpdate(
 @@ -90,6 +92,7 @@ export type FrontMatterLastUpdate = {
     * [parsable date string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse).
@@ -70,11 +70,11 @@ index a11dc782ef164586eb0b71510a53ad95af843f09..35b410c8b3df816ad1097a5b7947667e
    date?: Date | string;
 +  commit?: string;
  };
- 
+
  export async function readLastUpdateData(
 @@ -104,6 +107,7 @@ export async function readLastUpdateData(
    }
- 
+
    const frontMatterAuthor = lastUpdateFrontMatter?.author;
 +  const frontMatterCommit = lastUpdateFrontMatter?.commit;
    const frontMatterTimestamp = lastUpdateFrontMatter?.date
@@ -86,19 +86,19 @@ index a11dc782ef164586eb0b71510a53ad95af843f09..35b410c8b3df816ad1097a5b7947667e
      getLastUpdateMemoized().then((update) => update?.lastUpdatedAt);
 +  const getLastUpdateCommit = () =>
 +    getLastUpdateMemoized().then((update) => update?.lastUpdatedCommit);
- 
+
    const lastUpdatedBy = showLastUpdateAuthor
      ? frontMatterAuthor ?? (await getLastUpdateBy())
 @@ -125,8 +131,16 @@ export async function readLastUpdateData(
      ? frontMatterTimestamp ?? (await getLastUpdateAt())
      : undefined;
- 
+
 +  const lastUpdatedCommit = showLastUpdateTime
 +    ? frontMatterCommit ?? (await getLastUpdateCommit())
 +    : undefined;
 +
-+    console.log(lastUpdatedCommit)
-+    console.log(frontMatterCommit)
++    console.log("PATCH 1: " + lastUpdatedCommit)
++    console.log("PATCH 1+1: " + frontMatterCommit)
 +
    return {
      lastUpdatedBy,

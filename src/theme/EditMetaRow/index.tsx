@@ -13,11 +13,11 @@ export default function EditMetaRow({
   lastUpdatedBy,
   lastUpdatedCommit,
 }: Props): JSX.Element {
-  console.log(className);
-  console.log(editUrl);
-  console.log(lastUpdatedAt);
-  console.log(lastUpdatedBy);
-  console.log(lastUpdatedCommit);
+  console.log("EDIT METAROW: " + className);
+  console.log("EDIT METAROW: " + editUrl);
+  console.log("EDIT METAROW: " + lastUpdatedAt);
+  console.log("EDIT METAROW: " + lastUpdatedBy);
+  console.log("EDIT METAROW: " + lastUpdatedCommit);
   return (
     <div className={clsx("row", className)}>
       <div className="col">{editUrl && <EditThisPage editUrl={editUrl} />}</div>

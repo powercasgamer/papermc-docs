@@ -3969,7 +3969,7 @@ __metadata:
 
 "@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm%3A3.2.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.2.1-de6a1d1551.patch::locator=docs%40workspace%3A.":
   version: 3.2.1
-  resolution: "@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm%3A3.2.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.2.1-de6a1d1551.patch::version=3.2.1&hash=a828c0&locator=docs%40workspace%3A."
+  resolution: "@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm%3A3.2.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.2.1-de6a1d1551.patch::version=3.2.1&hash=3c8f73&locator=docs%40workspace%3A."
   dependencies:
     "@docusaurus/core": 3.2.1
     "@docusaurus/logger": 3.2.1
@@ -3990,7 +3990,7 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 953e8cae0e6d5117e80933a37a6f72f5378cb4f225790dbd49dedaf04d79f737c5e43688f46082ceab86bcbe7fed1d02ce67ce090ede57f796541dfe6d35dded
+  checksum: bdaf8913e5a43c2241486c04677bb852baccab91a368e171d1580631f07f2d25e9d8adb3d278f31a5d0282baf32ee59a9d864d3ea2a0de9357d27f4f17963e68
   languageName: node
   linkType: hard
 
@@ -4334,7 +4334,7 @@ __metadata:
 
 "@docusaurus/utils@patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch::locator=docs%40workspace%3A.":
   version: 3.2.1
-  resolution: "@docusaurus/utils@patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch::version=3.2.1&hash=009310&locator=docs%40workspace%3A."
+  resolution: "@docusaurus/utils@patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch::version=3.2.1&hash=bef000&locator=docs%40workspace%3A."
   dependencies:
     "@docusaurus/logger": 3.2.1
     "@docusaurus/utils-common": 3.2.1
@@ -4360,7 +4360,7 @@ __metadata:
   peerDependenciesMeta:
     "@docusaurus/types":
       optional: true
-  checksum: 65cfb3fef6c5692087292aa3017be3b20c44844368572abc08c6d290461c7e6673ba037a06d1a263294bc9102f6f7ad09c1e72a0a013a705caa5f5fa48e9263a
+  checksum: 14bfe3362ccefeee8d3335faaaf6cc9ea3b99ab3d471cab15a13e39e6fd84575597149ddf50fdd4d3b6de35dbce5fe777dc02e211bb67607cb1e8e52482889ab
   languageName: node
   linkType: hard
 

@@ -8,6 +8,11 @@ import EditMetaRow from "@theme/EditMetaRow";
 
 export default function DocItemFooter(): JSX.Element | null {
   const { metadata } = useDoc();
+
+  console.log("DOCITEM METADATA: " +  metadata)
+  console.log("DOCITEM METADATA: ", metadata)
+  console.log("DOCITEM METADATA: " + ++ metadata.lastUpdatedCommit)
+  console.log("DOCITEM METADATA: ", metadata.lastUpdatedCommit)
   const { editUrl, lastUpdatedAt, lastUpdatedBy, lastUpdatedCommit, tags } = metadata;
 
   const canDisplayTagsRow = tags.length > 0;
