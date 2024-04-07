@@ -1,10 +1,10 @@
-import React from 'react';
-import clsx from 'clsx';
-import EditThisPage from '@theme/EditThisPage';
-import type {Props} from '@theme/EditMetaRow';
+import React from "react";
+import clsx from "clsx";
+import EditThisPage from "@theme/EditThisPage";
+import type { Props } from "@theme/EditMetaRow";
 
-import LastUpdated from '@theme/LastUpdated';
-import styles from './styles.module.css';
+import LastUpdated from "@theme/LastUpdated";
+import styles from "./styles.module.css";
 
 export default function EditMetaRow({
   className,
@@ -13,15 +13,15 @@ export default function EditMetaRow({
   lastUpdatedBy,
   lastUpdatedCommit,
 }: Props): JSX.Element {
-  console.log(className)
-  console.log(editUrl)
-  console.log(lastUpdatedAt)
-  console.log(lastUpdatedBy)
-  console.log(lastUpdatedCommit)
+  console.log(className);
+  console.log(editUrl);
+  console.log(lastUpdatedAt);
+  console.log(lastUpdatedBy);
+  console.log(lastUpdatedCommit);
   return (
-    <div className={clsx('row', className)}>
+    <div className={clsx("row", className)}>
       <div className="col">{editUrl && <EditThisPage editUrl={editUrl} />}</div>
-      <div className={clsx('col', styles.lastUpdated)}>
+      <div className={clsx("col", styles.lastUpdated)}>
         {(lastUpdatedAt || lastUpdatedBy || lastUpdatedCommit) && (
           <LastUpdated
             lastUpdatedAt={lastUpdatedAt}
