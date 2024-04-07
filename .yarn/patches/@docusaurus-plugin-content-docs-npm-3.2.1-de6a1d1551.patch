@@ -1,0 +1,12 @@
+diff --git a/src/docs.ts b/src/docs.ts
+index 7c94593fa0cfc510b09541d8cdd7f9de0842c525..62c0b100db98c0b7ac3d9af087ff4b7ec76a24d1 100644
+--- a/src/docs.ts
++++ b/src/docs.ts
+@@ -225,6 +225,7 @@ async function doProcessDocMetadata({
+     version: versionMetadata.versionName,
+     lastUpdatedBy: lastUpdate.lastUpdatedBy,
+     lastUpdatedAt: lastUpdate.lastUpdatedAt,
++    lastUpdatedCommit: lastUpdate.lastUpdatedCommit,
+     sidebarPosition,
+     frontMatter,
+   };
