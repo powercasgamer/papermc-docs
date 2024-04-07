@@ -4270,36 +4270,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils@npm:3.1.0":
-  version: 3.1.0
-  resolution: "@docusaurus/utils@npm:3.1.0"
-  dependencies:
-    "@docusaurus/logger": 3.1.0
-    "@svgr/webpack": ^6.5.1
-    escape-string-regexp: ^4.0.0
-    file-loader: ^6.2.0
-    fs-extra: ^11.1.1
-    github-slugger: ^1.5.0
-    globby: ^11.1.0
-    gray-matter: ^4.0.3
-    jiti: ^1.20.0
-    js-yaml: ^4.1.0
-    lodash: ^4.17.21
-    micromatch: ^4.0.5
-    resolve-pathname: ^3.0.0
-    shelljs: ^0.8.5
-    tslib: ^2.6.0
-    url-loader: ^4.1.1
-    webpack: ^5.88.1
-  peerDependencies:
-    "@docusaurus/types": "*"
-  peerDependenciesMeta:
-    "@docusaurus/types":
-      optional: true
-  checksum: 5e71e5fee219ba1999e62ef5a08940fb3475ce915fcf8c3f67bdeda07274da9e21024239e8cbaac762064c9a0129eb1c9d2440f646420c76fb776828750491ff
-  languageName: node
-  linkType: hard
-
 "@docusaurus/utils@npm:3.2.1":
   version: 3.2.1
   resolution: "@docusaurus/utils@npm:3.2.1"
@@ -4334,7 +4304,7 @@ __metadata:
 
 "@docusaurus/utils@patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch::locator=docs%40workspace%3A.":
   version: 3.2.1
-  resolution: "@docusaurus/utils@patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch::version=3.2.1&hash=bef000&locator=docs%40workspace%3A."
+  resolution: "@docusaurus/utils@patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch::version=3.2.1&hash=f7ae52&locator=docs%40workspace%3A."
   dependencies:
     "@docusaurus/logger": 3.2.1
     "@docusaurus/utils-common": 3.2.1
@@ -4360,7 +4330,7 @@ __metadata:
   peerDependenciesMeta:
     "@docusaurus/types":
       optional: true
-  checksum: 14bfe3362ccefeee8d3335faaaf6cc9ea3b99ab3d471cab15a13e39e6fd84575597149ddf50fdd4d3b6de35dbce5fe777dc02e211bb67607cb1e8e52482889ab
+  checksum: b6e0d065cffae8a64b7790f627e0f711aabb8d4c78cc1a4740602803a2e7c1656270472c3fbae360e324d6790eae83ea25ca31587a1b0a99a73b9e0de6eb3500
   languageName: node
   linkType: hard
 
