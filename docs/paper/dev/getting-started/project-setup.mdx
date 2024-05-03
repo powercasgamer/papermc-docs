@@ -2,6 +2,8 @@
 slug: /dev/project-setup
 description: Step-by-step instructions on how to set up a plugin development environment.
 ---
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Paper Project Setup
 
@@ -25,22 +27,50 @@ You will land into the `build.gradle.kts` file where you can add your dependenci
 
 To add Paper as a dependency, you will need to add the Paper repository to your `build.gradle.kts` file as well as the dependency itself.
 
-<VersionFormattedCode language={"kotlin"} title={"build.gradle.kts"}>
-```
-repositories {
-    mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
-}
+<Tabs>
+<TabItem value="kotlin" label="build.gradle.kts">
+  <VersionFormattedCode language={"kotlin"}>
+    ```
+    repositories {
+      mavenCentral()
+      maven("https://repo.papermc.io/repository/maven-public/")
+    }
 
-dependencies {
-    compileOnly("io.papermc.paper:paper-api:%%_MAJ_MIN_MC_%%-R0.1-SNAPSHOT")
-}
+    dependencies {
+      compileOnly("io.papermc.paper:paper-api:%%_MAJ_MIN_MC_%%-R0.1-SNAPSHOT")
+    }
 
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
-}
-```
-</VersionFormattedCode>
+    java {
+      toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    }
+
+    ```
+  </VersionFormattedCode>
+
+</TabItem>
+<TabItem value="xml" label="pom.xml">
+  <VersionFormattedCode language={"xml"}>
+    ```
+    <repositories>
+      <repository>
+        <id>papermc</id>
+        <url>https://repo.papermc.io/repository/maven-public/</url>
+      </repository>
+    </repositories>
+
+    <dependencies>
+      <dependency>
+        <groupId>io.papermc.paper</groupId>
+        <artifactId>paper-api</artifactId>
+        <version>%%_MAJ_MIN_MC_%%-R0.1-SNAPSHOT</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+    ```
+  </VersionFormattedCode>
+
+</TabItem>
+</Tabs>
 
 ### Setting up the `src` directory
 
