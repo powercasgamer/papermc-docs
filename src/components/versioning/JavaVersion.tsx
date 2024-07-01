@@ -15,18 +15,16 @@ type TargetResolver = (
 
 const createProjectTarget = (
   project: Project,
-  versionType: VersionType = VersionType.MajorMinorPatch
 ): TargetResolver => {
   return async (currentVersion) => {
-    const version = await getProjectVersion(project, currentVersion, versionType);
-
+    const version = await getProjectVersion(project, currentVersion);
     return `https://jd.papermc.io/${project}/${version}`;
   };
 };
 
 const targets: { [project: string]: TargetResolver } = {
   paper: createProjectTarget("paper"),
-  velocity: createProjectTarget("velocity", VersionType.MajorMinorZeroed),
+  velocity: createProjectTarget("velocity"),
   java: async (_, module) => {
     const version = getProperty("DOCS_JAVA") ?? "21";
 
@@ -63,8 +61,5 @@ export default function Javadoc({ name, module, project = "paper", children }: J
 }
 
 interface JavadocProps {
-  name?: string;
-  module?: string;
   project?: Project | "java" | "adventure";
-  children: any;
 }
